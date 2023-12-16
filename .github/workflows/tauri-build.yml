@@ -86,13 +86,11 @@ jobs:
           args: --target universal-apple-darwin
 
       - name: build app
-        uses: tauri-apps/tauri-action@v0
+        uses: tauri-apps/tauri-action@v0 # runs `npm run tauri build`
         id: build_os
         if: "!startsWith(matrix.platform, 'macos')"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
 
       - name: upload ${{ matrix.platform }}
         uses: actions/upload-artifact@v3
