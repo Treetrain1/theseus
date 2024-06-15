@@ -1,7 +1,6 @@
 name: 'Tauri GUI Build'
 on:
   push:
-    branches: [ master linuxfix ]
   pull_request:
 jobs:
   test-tauri:
