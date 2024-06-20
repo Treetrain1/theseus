@@ -1,4 +1,4 @@
-import { invoke } from 'core'
+import { invoke} from '@tauri-apps/api/core'
 
 /// Gets the game versions from daedalus
 // Returns a VersionManifest

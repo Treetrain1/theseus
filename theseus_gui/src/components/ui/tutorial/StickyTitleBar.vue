@@ -1,6 +1,6 @@
 <script setup>
 import { Button, XIcon } from 'omorphia'
-import { appWindow } from '@tauri-apps/api/window'
+import { webviewWindow } from '@tauri-apps/api'
 import { saveWindowState, StateFlags } from 'tauri-plugin-window-state-api'
 import { window } from '@tauri-apps/api'
 import { MinimizeIcon, MaximizeIcon } from '@/assets/icons'
@@ -9,10 +9,10 @@ import { MinimizeIcon, MaximizeIcon } from '@/assets/icons'
 <template>
   <div data-tauri-drag-region class="fake-appbar">
     <section class="window-controls">
-      <Button class="titlebar-button" icon-only @click="() => appWindow.minimize()">
+      <Button class="titlebar-button" icon-only @click="() => webviewWindow.minimize()">
         <MinimizeIcon />
       </Button>
-      <Button class="titlebar-button" icon-only @click="() => appWindow.toggleMaximize()">
+      <Button class="titlebar-button" icon-only @click="() => webviewWindow.toggleMaximize()">
         <MaximizeIcon />
       </Button>
       <Button
