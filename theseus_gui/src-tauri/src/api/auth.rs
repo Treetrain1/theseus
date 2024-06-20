@@ -24,14 +24,14 @@ pub async fn auth_login(app: tauri::AppHandle) -> Result<Option<Credentials>> {
 
     let start = Utc::now();
 
-    if let Some(window) = app.get_window("signin") {
+    if let Some(window) = app.get_webview_window("signin") {
         window.close()?;
     }
 
-    let window = tauri::WindowBuilder::new(
+    let window = tauri::WebviewWindowBuilder::new(
         &app,
         "signin",
-        tauri::WindowUrl::External(flow.redirect_uri.parse().map_err(
+        tauri::WebviewUrl::External(flow.redirect_uri.parse().map_err(
             |_| {
                 theseus::ErrorKind::OtherError(
                     "Error parsing auth redirect URL".to_string(),
@@ -55,11 +55,12 @@ pub async fn auth_login(app: tauri::AppHandle) -> Result<Option<Credentials>> {
 
         if window
             .url()
+            .unwrap()
             .as_str()
             .starts_with("https://login.live.com/oauth20_desktop.srf")
         {
             if let Some((_, code)) =
-                window.url().query_pairs().find(|x| x.0 == "code")
+                window.url().unwrap().query_pairs().find(|x| x.0 == "code")
             {
                 window.close()?;
                 let val =
